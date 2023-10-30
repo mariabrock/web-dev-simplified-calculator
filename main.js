@@ -12,7 +12,7 @@ class Calculator {
 	}
 
 	delete() {
-
+		this.currentOperand = this.currentOperand.toString().slice(0, -1)
 	}
 
 	appendNumber(number) {
@@ -32,26 +32,35 @@ class Calculator {
 	}
 
 	compute() {
+		console.log('Compute has fired.')
 		let computation
 		const previous = parseFloat(this.previousOperand)
 		const current = parseFloat(this.currentOperand)
+		console.log(parseFloat(this.previousOperand))
+		console.log(this.operation)
+		console.log(current)
 		if(isNaN(previous) || isNaN(current)) return
 		switch (this.operation) {
-			case '+':
-				console.log(computation = previous + current)
+			case '&plus;':
+				computation = previous + current
+				console.log('Addition has computed.')
 				break
-			case '-':
-				console.log(computation = previous - current)
+			case '&minus;':
+				computation = previous - current
+				console.log('Subtraction has computed.')
 				break
-			case '*':
-				console.log(computation = previous * current)
+			case '&times;':
+				computation = previous * current
+				console.log('Multiplication has computed.')
 				break
-			case '÷':
-				console.log(computation = previous / current)
+			case '&divide;':
+				computation = previous / current
+				console.log('Division has computed.')
 				break
 			default:
-				return
+				return "Something broke."
 		}
+		console.log('Compute has completed')
 		this.currentOperand = computation
 		this.operation = undefined
 		this.previousOperand = ''
@@ -88,6 +97,7 @@ operationButtons.forEach(button => {
 })
 
 equalsButton.addEventListener('click', button => {
+	console.log('You pressed the equals button.')
 	calculator.compute()
 	calculator.updateDisplay()
 })
@@ -97,13 +107,7 @@ allClearButton.addEventListener('click', button => {
 	calculator.updateDisplay()
 })
 
-
-
-
-
-
-
-
-
-
-
+deleteButton.addEventListener('click', button => {
+	calculator.delete()
+	calculator.updateDisplay()
+})
